@@ -78,5 +78,19 @@ namespace SharpAutoForm
                 e.Cancel = true;
             }
         }
+
+        private void _exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void _aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Step 1. Create a new Form
+            AboutForm aboutForm = new AboutForm();
+
+            // Step 2. Show the About Form with Show Dialog (a model method to display the form)
+            aboutForm.ShowDialog();
+        }
     }
 }

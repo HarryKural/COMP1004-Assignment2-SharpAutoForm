@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SharpAutoForm")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Sharp Auto Form")]
+[assembly: AssemblyDescription("This program calculates the amount due on a New or Used Vehicle based on accessories and options selected and a trade-in value (if any).")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Harshit Sharma")]
 [assembly: AssemblyProduct("SharpAutoForm")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
