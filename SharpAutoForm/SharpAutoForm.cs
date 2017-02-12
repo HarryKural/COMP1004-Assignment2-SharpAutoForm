@@ -32,11 +32,14 @@ namespace SharpAutoForm
             {
                 // calculate
                 case "Calculate":
+                    
                     double subTotal;
                     double addOptions = Double.Parse(AdditionalOptionsTextBox.Text);
                     double basePrice = Double.Parse(BasePriceTextBox.Text);
 
                     subTotal = addOptions + basePrice;
+
+                    SubTotalTextBox.Text = subTotal.ToString();
                     
                     break;
 
@@ -73,6 +76,40 @@ namespace SharpAutoForm
                         }
                     break;
             }
+        }
+
+        public void validValuesChecker(object sender, EventArgs e)
+        {
+            TextBox ValidValues = sender as TextBox;
+
+                switch (ValidValues.Tag.ToString())
+                {
+                    case "basePrice":
+                        if (BasePriceTextBox.Text != "")
+                        { 
+                         double basePrice = 0;
+                            if (!Double.TryParse(BasePriceTextBox.Text, out basePrice))
+                            {
+                                MessageBox.Show("You must enter any number!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                BasePriceTextBox.Text = BasePriceTextBox.Text.Remove(BasePriceTextBox.Text.Length - 1);
+                                BasePriceTextBox.SelectionStart = BasePriceTextBox.Text.Length;
+                            }
+                        }
+                        break;
+
+                    case "tradeIn":
+                        if (TradeInAllowanceTextBox.Text != "")
+                        { 
+                         double tradeIn = 0;
+                            if (!Double.TryParse(TradeInAllowanceTextBox.Text, out tradeIn))
+                            {
+                                MessageBox.Show("You must enter any number!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                TradeInAllowanceTextBox.Text = TradeInAllowanceTextBox.Text.Remove(TradeInAllowanceTextBox.Text.Length - 1);
+                                TradeInAllowanceTextBox.SelectionStart = TradeInAllowanceTextBox.Text.Length;
+                            }
+                        }
+                        break;
+                }
         }
 
         private void _exitToolStripMenuItem_Click(object sender, EventArgs e)

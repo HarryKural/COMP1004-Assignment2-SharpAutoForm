@@ -97,6 +97,8 @@
             this.BasePriceTextBox.Name = "BasePriceTextBox";
             this.BasePriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.BasePriceTextBox.TabIndex = 2;
+            this.BasePriceTextBox.Tag = "basePrice";
+            this.BasePriceTextBox.TextChanged += new System.EventHandler(this.validValuesChecker);
             // 
             // TradeInAllowanceTextBox
             // 
@@ -104,7 +106,9 @@
             this.TradeInAllowanceTextBox.Name = "TradeInAllowanceTextBox";
             this.TradeInAllowanceTextBox.Size = new System.Drawing.Size(100, 20);
             this.TradeInAllowanceTextBox.TabIndex = 3;
+            this.TradeInAllowanceTextBox.Tag = "tradeIn";
             this.TradeInAllowanceTextBox.Text = "0";
+            this.TradeInAllowanceTextBox.TextChanged += new System.EventHandler(this.validValuesChecker);
             // 
             // AdditionalOptionsLabel
             // 
