@@ -16,5 +16,67 @@ namespace SharpAutoForm
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// This method handles all the button clicks:
+        /// using switch case by tagging each button to
+        /// every case and performing their work.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void buttonClickHandler(object sender, EventArgs e)
+        {
+            Button ClickHandler = sender as Button;
+
+            switch (ClickHandler.Tag.ToString())
+            {
+                // calculate
+                case "Calculate":
+
+                    break;
+
+                case "Clear":
+                    // clearing textboxes
+                    BasePriceTextBox.Text = "";
+                    AdditionalOptionsTextBox.Text = "";
+                    SubTotalTextBox.Text = "";
+                    SalesTaxTextBox.Text = "";
+                    TotalTextBox.Text = "";
+                    TradeInAllowanceTextBox.Text = "0";
+                    AmountDueTextBox.Text = "";
+
+                    // unchecking checkboxes
+                    StereoSystemCheckBox.Checked = false;
+                    LeatherInteriorCheckBox.Checked = false;
+                    ComputerNavigationCheckBox.Checked = false;
+
+                    // setting value of radiobuttons
+                    StandardRadioButton.Checked = true;
+                    PearlizedRadioButton.Checked = false;
+                    CustomizedDetailingRadioButton.Checked = false;
+
+                    // focusing cursor to the base price textbox
+                    BasePriceTextBox.Focus();
+                    break;
+
+                case "Exit":
+                    
+                    break;
+            }
+        }
+
+        private void _sharpAutoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are You Sure?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.OK)
+            {
+                this.Close();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
