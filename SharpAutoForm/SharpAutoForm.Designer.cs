@@ -464,7 +464,9 @@
             this.Controls.Add(this.TradeInAllowanceLabel);
             this.Controls.Add(this.BasePriceLabel);
             this.Controls.Add(this.AutoCenterMenuStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.AutoCenterMenuStrip;
+            this.MaximizeBox = false;
             this.Name = "SharpAutoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto Center";
