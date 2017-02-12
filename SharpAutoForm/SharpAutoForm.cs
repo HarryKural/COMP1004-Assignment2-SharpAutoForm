@@ -32,21 +32,56 @@ namespace SharpAutoForm
             {
                 // calculate
                 case "Calculate":
-                    
-                    double subTotal;
-                    double addOptions = Double.Parse(AdditionalOptionsTextBox.Text);
-                    double basePrice = Double.Parse(BasePriceTextBox.Text);
 
-                    subTotal = addOptions + basePrice;
+                    // it will not calculate if there is nothing in the fields
+                    if (BasePriceTextBox.Text.ToString().Equals("") || TradeInAllowanceTextBox.Text.ToString().Equals(""))
+                    {
+                        MessageBox.Show("You must enter any valid value.", "Error: Invalid value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // variables used to do calculations and parsing them to Double
+                        double subTotal;
+                        double salesTax;
+                        double total;
+                        double amountDue;
+                        double addOptions = Double.Parse(AdditionalOptionsTextBox.Text);
+                        double basePrice = Double.Parse(BasePriceTextBox.Text);
+                        double tradeIn = Double.Parse(TradeInAllowanceTextBox.Text);
 
-                    SubTotalTextBox.Text = subTotal.ToString();
-                    
+                        // calculating subTotal by adding text of both textboxes
+                        subTotal = addOptions + basePrice;
+
+                            // setting text property of subTotal = calculated (ToString)
+                            SubTotalTextBox.Text = subTotal.ToString();
+
+                        // getting return value of calculateSalesTax method
+                        salesTax = calculateSalesTax(subTotal);
+
+                            // setting up salesTax value
+                            SalesTaxTextBox.Text = salesTax.ToString();
+
+                        // adding value of subTotal and salesTax
+                        total = subTotal + salesTax;
+
+                            // showing value of total in textbox
+                            TotalTextBox.Text = total.ToString();
+
+                        // calculating amount due
+                        amountDue = total - tradeIn;
+
+                            // showing value of amount due in text box
+                            AmountDueTextBox.Text = amountDue.ToString();
+
+
+
+                    }
                     break;
 
                 case "Clear":
                     // clearing textboxes
                     BasePriceTextBox.Text = "";
-                    AdditionalOptionsTextBox.Text = "";
+                    AdditionalOptionsTextBox.Text = "0";
                     SubTotalTextBox.Text = "";
                     SalesTaxTextBox.Text = "";
                     TotalTextBox.Text = "";
@@ -117,6 +152,11 @@ namespace SharpAutoForm
             this.ExitButton.PerformClick();
         }
 
+        private void calculateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.CalculateButton.PerformClick();
+        }
+
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ClearButton.PerformClick();
@@ -148,6 +188,8 @@ namespace SharpAutoForm
 
                 // Setting the selected color to text in the textboxes
                 BasePriceTextBox.ForeColor = AutoCenterColorDialog.Color;
+                // because of the readOnly property of the textBox
+                AmountDueTextBox.BackColor = AmountDueTextBox.BackColor;
                 AmountDueTextBox.ForeColor = AutoCenterColorDialog.Color;
         }
 
@@ -162,7 +204,7 @@ namespace SharpAutoForm
             double pearlized = 345.72;
             double customizedDetailing = 599.99;
 
-
+            // Checking if checkboxes and radiobuttons are checked
             if (StereoSystemCheckBox.Checked == true)
                 additionalOptions += stereo;
                    
@@ -178,11 +220,14 @@ namespace SharpAutoForm
             if (CustomizedDetailingRadioButton.Checked == true)
                 additionalOptions += customizedDetailing;
                     
+            // showing the value of additional options textbox as ToString()
             AdditionalOptionsTextBox.Text = additionalOptions.ToString();
-            
-           }
+        }
 
-        
+        public double calculateSalesTax(double subTotal)
+        {
+            return subTotal * 0.13;
+        }
     }
 }
 
