@@ -32,7 +32,12 @@ namespace SharpAutoForm
             {
                 // calculate
                 case "Calculate":
+                    double subTotal;
+                    double addOptions = Double.Parse(AdditionalOptionsTextBox.Text);
+                    double basePrice = Double.Parse(BasePriceTextBox.Text);
 
+                    subTotal = addOptions + basePrice;
+                    
                     break;
 
                 case "Clear":
@@ -60,28 +65,24 @@ namespace SharpAutoForm
                     break;
 
                 case "Exit":
-                    
+                    DialogResult result = MessageBox.Show("Are You Sure?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        if (result == DialogResult.OK)
+                        {
+                            this.Close();
+                        }
                     break;
-            }
-        }
-
-        private void _sharpAutoForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are You Sure?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.OK)
-            {
-                this.Close();
-            }
-            else
-            {
-                e.Cancel = true;
             }
         }
 
         private void _exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.ExitButton.PerformClick();
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ClearButton.PerformClick();
         }
 
         private void _aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,5 +93,59 @@ namespace SharpAutoForm
             // Step 2. Show the About Form with Show Dialog (a model method to display the form)
             aboutForm.ShowDialog();
         }
+
+        private void _fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Show the Font Dialog
+            AutoCenterFontDialog.ShowDialog();
+                
+                // Setting the selected font to specific textboxes
+                BasePriceTextBox.Font = AutoCenterFontDialog.Font;
+                AmountDueTextBox.Font = AutoCenterFontDialog.Font; 
+        }
+
+        private void _colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Show Dialog for Color
+            AutoCenterColorDialog.ShowDialog();
+
+                // Setting the selected color to text in the textboxes
+                BasePriceTextBox.ForeColor = AutoCenterColorDialog.Color;
+                AmountDueTextBox.ForeColor = AutoCenterColorDialog.Color;
+        }
+
+        private void _changesHandler(object sender, EventArgs e)
+        {
+            double additionalOptions = 0;
+
+            // variables to set price for accessories
+            double stereo = 425.76;
+            double leatherInterior = 987.41;
+            double computerNavigation = 1741.23;
+            double pearlized = 345.72;
+            double customizedDetailing = 599.99;
+
+
+            if (StereoSystemCheckBox.Checked == true)
+                additionalOptions += stereo;
+                   
+            if (LeatherInteriorCheckBox.Checked == true)
+                additionalOptions += leatherInterior;
+              
+            if (ComputerNavigationCheckBox.Checked == true)
+                additionalOptions += computerNavigation;
+
+            if (PearlizedRadioButton.Checked == true)
+                additionalOptions += pearlized;
+
+            if (CustomizedDetailingRadioButton.Checked == true)
+                additionalOptions += customizedDetailing;
+                    
+            AdditionalOptionsTextBox.Text = additionalOptions.ToString();
+            
+           }
+
+        
     }
 }
+
