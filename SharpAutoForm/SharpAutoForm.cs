@@ -26,6 +26,9 @@ namespace SharpAutoForm
 {
     public partial class SharpAutoForm : Form
     {
+        // create a reference to the previous form
+        public Form previousForm;
+
         public SharpAutoForm()
         {
             InitializeComponent();
@@ -119,7 +122,7 @@ namespace SharpAutoForm
 
                         if (result == DialogResult.OK)
                         {
-                            this.Close();
+                            this.previousForm.Close();
                         }
                     break;
             } // end of switch
@@ -203,6 +206,28 @@ namespace SharpAutoForm
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ClearButton.PerformClick();
+        }
+
+        /// <summary>
+        /// This method performs the function of exit button on click
+        /// It triggers Form closing event handler.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SharpAutoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // showing up confirm message when exit button clicked
+            DialogResult result = MessageBox.Show("Are You Sure?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+            // if OK is clicked perform function of exit button otherwise cancel
+            if (result == DialogResult.OK)
+            {
+                this.previousForm.Close();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         /// <summary>
@@ -303,7 +328,7 @@ namespace SharpAutoForm
         {
             return subTotal * 0.13;
         }
-
+        
     } // end of class
 
 } // end of namespace

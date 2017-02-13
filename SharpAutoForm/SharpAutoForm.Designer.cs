@@ -470,6 +470,7 @@
             this.Name = "SharpAutoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto Center";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SharpAutoForm_FormClosing);
             this.AdditionalItemsGroupBox.ResumeLayout(false);
             this.AdditionalItemsGroupBox.PerformLayout();
             this.ExteriorFinishGroupBox.ResumeLayout(false);
